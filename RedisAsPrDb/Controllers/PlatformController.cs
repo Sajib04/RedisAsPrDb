@@ -54,7 +54,7 @@ namespace RedisAsPrDb.Controllers
         [Route("Platform/DeleteKey/{Id}")]
         public ActionResult DeleteKey(string id)
         {
-            return Ok();
+            return Ok(_platormRepo.DeleteByKey(id));
         }
 
         //[HttpPost]

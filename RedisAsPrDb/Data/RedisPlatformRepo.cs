@@ -44,23 +44,28 @@ namespace RedisAsPrDb.Data
         public string DeletePlatformById(string id)
         {
             var db = _redisConnectionMultiplexer.GetDatabase();
-            var platform = GetPlatformById(id);
-            if (platform != null)
+            if (db.Database != 0)
             {
-                if (platform.Id == id)
+                var platform = GetPlatformById(id);
+                if (platform != null)
                 {
-                    var result = db.KeyDelete(id);
-                    return result.ToString();
+                    if (platform.Id == id)
+                    {
+                        var result = db.KeyDelete(id);
+                        return result.ToString();
+                    }
                 }
             }
                 
             return "";
         }
 
-        public IEnumerable<Platform?>? GetAllPlatform()
+        //public IEnumerable<List<Platform>> GetAllPlatform()
+        public object GetAllPlatform()
         {
             List<string> listKeys = new List<string>();
             Dictionary<string, string> dictionaryKeyValue = new Dictionary<string, string>();
+            List<Platform> list = new List<Platform>();
             var db = _redisConnectionMultiplexer.GetDatabase();
             //var completeSet = db.SetMembers("PlatformSet");
             //if (completeSet.Length > 0)
@@ -75,15 +80,17 @@ namespace RedisAsPrDb.Data
             listKeys.AddRange(keys.Select(key => (string)key).ToList());
             foreach (var key in listKeys)
             {
+                Platform? platform = new Platform();
                 var value = db.StringGet(key);
                 dictionaryKeyValue.Add(key, value);
+                platform.Id = key;
+                platform.Name = key;
+                list.Add(platform);
             }
-            var obj = JsonSerializer.Serialize<Platform>(dictionaryKeyValue);
-
-
+            //var obj = JsonSerializer.Serialize<Platform>(dictionaryKeyValue);
+            //return obj;
+            var obj = JsonSerializer.Serialize<List<Platform>>(list);
             return obj;
-
-
             
         }
 
@@ -105,11 +112,11 @@ namespace RedisAsPrDb.Data
             return null;
         }
 
-        public Platform? DeleteByKey( string key)
+        public bool DeleteByKey( string key)
         {
             var db = _redisConnectionMultiplexer.GetDatabase();
-            db.KeyDelete(key);
-            return null;
+            var result = db.KeyDelete(key);
+            return result;
         }
 
     }

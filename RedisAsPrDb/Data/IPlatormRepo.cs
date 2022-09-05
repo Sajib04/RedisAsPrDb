@@ -8,7 +8,8 @@ namespace RedisAsPrDb.Data
         void CreatePlatform(Platform platform);
         string DeletePlatformById(string id);
         Platform? GetPlatformById(string id);
-        IEnumerable<Platform?>? GetAllPlatform();
-            
+        //IEnumerable<Platform?>? GetAllPlatform();
+        object GetAllPlatform();
+        bool DeleteByKey(string key);
     }
 }

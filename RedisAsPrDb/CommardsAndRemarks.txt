@@ -1,6 +1,9 @@
 ﻿postman collection: 
 1.	https://localhost:44379/weatherforecast
 
+postman collection json link:
+https://www.getpostman.com/collections/6ec39a6970574def6c32
+
 --------------------------------------------------
 
 nuget package extension for redis:
