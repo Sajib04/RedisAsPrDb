@@ -1,0 +1,91 @@
+﻿postman collection: 
+1.	https://localhost:44379/weatherforecast
+
+--------------------------------------------------
+
+nuget package extension for redis:
+Microsoft.Extensions.Caching.Redis
+or
+Microsoft.Extensions.Caching.StackExchangeRedis			-- we will use this library
+or
+StackExchange.Redis
+
+IDistributedCache(restricted Datatypes)
+IConnectionMultiplexer(all datatypes allowed)
+
+----------------------------------------------------
+
+to check which docker container is running: docker ps
+commands:
+1. to check docker version: docker --version
+
+-----------
+
+to run docker redis from cmd/powershell:
+	docker exec -it 7f0161390c1b /bin/bash
+	redis-cli
+	ping
+	pong
+
+setting a key-value using command: set platform:10010 Docker
+get the value using key: get platform:10010  >> Docker	
+To update value using command: set platform:10010 Redis
+get the value using key: get platform:10010  >> Redis
+to delete the key-value pair using command: del platform:10010
+
+type >>exit<< to get out from the redis-cli
+
+to get all db counts: 
+CONFIG GET databases
+1) "databases"
+2) "16"
+
+
+-----------------
+
+tools for redis: redis desktop manager(Redis Desktop Manager --   https://redis-desktop-manager.software.informer.com/download/  ).
+
+-------------------------------------
+
+add this 2 property in the project file:
+<Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+
+-------------------------------------------------------------
+
+
+
+Syntax
+Following is the basic syntax of Redis client.
+
+$redis-cli 
+Example
+Following example explains how we can start Redis client.
+
+To start Redis client, open the terminal and type the command redis-cli. 
+This will connect to your local server and now you can run any command.
+
+$redis-cli 
+redis 127.0.0.1:6379> 
+redis 127.0.0.1:6379> PING  
+PONG
+In the above example, we connect to Redis server running on the local machine and execute a command PING, 
+that checks whether the server is running or not.
+
+Run Commands on the Remote Server
+To run commands on Redis remote server, you need to connect to the server by the same client redis-cli
+
+Syntax
+$ redis-cli -h host -p port -a password
+Example
+Following example shows how to connect to Redis remote server, running on host 127.0.0.1, port 6379 and has password mypass.
+
+$redis-cli -h 127.0.0.1 -p 6379 -a "mypass" 
+redis 127.0.0.1:6379> 
+redis 127.0.0.1:6379> PING  
+PONG
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
